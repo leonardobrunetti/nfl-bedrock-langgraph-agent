@@ -43,6 +43,18 @@ Example questions:
 - Amazon Bedrock
 - Amazon Nova models
 
+## Repository Structure
+
+```text
+nfl-bedrock-langgraph-agent/
+├── data/
+│   └── games.csv
+├── notebooks/
+│   └── nfl_agent_walkthrough.ipynb
+├── README.md
+├── requirements.txt
+└── .gitignore
+
 ## Why This Architecture?
 
 A generic Pandas agent can be useful, but it may sometimes generate incorrect Python code.
