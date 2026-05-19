@@ -120,6 +120,8 @@ us-east-1
 
 If you use another region, update the `region_name` value in the notebook.
 
+You can optionally create a `.env` file based on `.env.example` to store local configuration such as the AWS region and model ID.
+
 ## Why This Architecture?
 
 A generic Pandas agent can be useful, but it may sometimes generate incorrect Python code.
