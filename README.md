@@ -54,6 +54,71 @@ nfl-bedrock-langgraph-agent/
 ├── README.md
 ├── requirements.txt
 └── .gitignore
+```
+
+- `data/` contains the NFL dataset used by the notebook.
+- `notebooks/` contains the step-by-step Jupyter walkthrough.
+- `requirements.txt` lists the Python dependencies needed to run the project.
+
+## How to Run
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/leonardobrunetti/nfl-bedrock-langgraph-agent.git
+cd nfl-bedrock-langgraph-agent
+```
+
+2. Create and activate a virtual environment:
+
+```bash
+python -m venv .venv
+```
+
+On Windows PowerShell:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+4. Configure AWS credentials:
+
+```bash
+aws configure
+```
+
+5. Open the notebook:
+
+```bash
+code notebooks/nfl_agent_walkthrough.ipynb
+```
+
+6. Select the `.venv` kernel in VS Code and run the notebook cells.
+
+## AWS Bedrock Notes
+
+This project uses Amazon Bedrock as the LLM platform.
+
+The notebook currently uses an Amazon Nova model. You need:
+
+- AWS CLI installed
+- AWS credentials configured
+- Bedrock access enabled in your AWS account
+- model access enabled in the selected AWS region
+
+The original development region was:
+
+```text
+us-east-1
+```
+
+If you use another region, update the `region_name` value in the notebook.
 
 ## Why This Architecture?
 
@@ -98,6 +163,40 @@ The agent can currently answer questions about:
 - highest scoring games
 - games played by a specific team
 
+## Example Questions
+
+You can ask questions such as:
+
+```text
+Show me the top 10 teams by record in the available games.
+```
+
+```text
+Which were the 5 highest scoring games in the dataset?
+```
+
+```text
+Show me all available games for the Buffalo Bills.
+```
+
+```text
+Which game had the largest score margin?
+```
+
+## Lessons Learned
+
+During development, I tested a generic Pandas dataframe agent first.
+
+That approach was useful, but it also showed some reliability issues:
+
+- the model sometimes generated invalid Python code
+- the model sometimes used the wrong tool format
+- the model sometimes made small calculation or formatting mistakes
+
+The final design uses deterministic tools instead.
+
+This makes the model responsible for understanding the question and selecting the right tool, while Python handles the actual calculations.
+
 ## Limitations
 
 The current dataset only covers part of the 2022 NFL season, so the agent should only answer based on the available games.
@@ -121,4 +220,3 @@ Possible improvements:
 - Move notebook logic into a Python package
 - Build a small CLI or web app
 - Add tests for the analysis functions
-
